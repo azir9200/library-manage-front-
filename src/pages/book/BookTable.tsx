@@ -47,7 +47,7 @@ export function BookTable() {
 
             <div className="space-x-6 flex justify-center items-center my-2">
               <Link
-                to={`api/books/edit/:${book._id}`}
+                to={`/books/edit/${book._id}`}
                 className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
               >
                 Edit <Edit />
@@ -55,7 +55,7 @@ export function BookTable() {
               <Link to={`/borrow}`} className="text-right">
                 Borrow
               </Link>
-              <Link to={`/books/delete/:${book._id}`} className="text-right">
+              <Link to={`/books/delete/${book._id}`} className="text-right">
                 Action
               </Link>
             </div>

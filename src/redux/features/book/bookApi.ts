@@ -1,15 +1,16 @@
+import type { TBook } from "@/components/Types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
   endpoints: (builder) => ({
     // Add a Book
     addBook: builder.mutation({
       query: (data) => {
         return {
           method: "POST",
-          url: `/api/books`,
+          url: `/books`,
           body: data,
         };
       },
@@ -18,15 +19,23 @@ export const baseApi = createApi({
     // Fetch all BOOKS
     getAllBook: builder.query({
       query: () => ({
-        url: "/api/books",
+        url: "/books",
         method: "GET",
       }),
     }),
     // Fetch a single product by ID
     getBookDetails: builder.query({
       query: (id: string) => ({
-        url: `api/books/${id}`,
+        url: `/books/${id}`,
         method: "GET",
+      }),
+    }),
+    // Fetch edit book by ID
+    editBook: builder.mutation({
+      query: ({ id, data }: { id: string; data: TBook }) => ({
+        url: `/books/edit/${id}`,
+        method: "PATCH",
+        body: data,
       }),
     }),
   }),
@@ -35,4 +44,5 @@ export const {
   useAddBookMutation,
   useGetAllBookQuery,
   useGetBookDetailsQuery,
+  useEditBookMutation,
 } = baseApi;
