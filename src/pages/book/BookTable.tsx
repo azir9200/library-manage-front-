@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetAllBookQuery } from "@/redux/features/book/bookApi";
+import { Edit } from "lucide-react";
 
 import { Link } from "react-router-dom";
 
@@ -44,9 +45,12 @@ export function BookTable() {
             <TableCell className="font-medium">{book.copies}</TableCell>
             <TableCell className="font-medium">{book.available}</TableCell>
 
-            <div className="space-x-6">
-              <Link to={`api/books/edit/:${book._id}`} className="text-right">
-                Edit
+            <div className="space-x-6 flex justify-center items-center my-2">
+              <Link
+                to={`api/books/edit/:${book._id}`}
+                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
+              >
+                Edit <Edit />
               </Link>
               <Link to={`/borrow}`} className="text-right">
                 Borrow
