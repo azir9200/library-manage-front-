@@ -4,6 +4,17 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000" }),
   endpoints: (builder) => ({
+    // Add a Book
+    addBook: builder.mutation({
+      query: (data) => {
+        return {
+          method: "POST",
+          url: `/api/books`,
+          body: data,
+        };
+      },
+    }),
+
     // Fetch all BOOKS
     getAllBook: builder.query({
       query: () => ({
@@ -20,4 +31,8 @@ export const baseApi = createApi({
     }),
   }),
 });
-export const { useGetAllBookQuery, useGetBookDetailsQuery } = baseApi;
+export const {
+  useAddBookMutation,
+  useGetAllBookQuery,
+  useGetBookDetailsQuery,
+} = baseApi;

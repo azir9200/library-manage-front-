@@ -10,7 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useGetBookDetailsQuery } from "@/redux/features/book/bookApi";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -40,13 +40,17 @@ const EditBook = () => {
           <TableRow key={book._id}>
             <TableCell>{book.title}</TableCell>
             <TableCell>{book.author}</TableCell>
-            <TableCell className="font-medium">{book.genre}</TableCell>
-            <TableCell className="font-medium">{book.isbn}</TableCell>
-            <TableCell className="font-medium">{book.copies}</TableCell>
-            <TableCell className="font-medium">{book.available}</TableCell>
-            <Button to={`/books/:${book._id}`} className="text-right">
+            <TableCell>{book.genre}</TableCell>
+            <TableCell>{book.isbn}</TableCell>
+            <TableCell className="">{book.copies}</TableCell>
+            <TableCell className="">{book.available}</TableCell>
+            {/* <Button to={`/books/:${book._id}`} className="text-right">
               Submit
-            </Button>
+            </Button> */}
+
+            <Link to={`/books/edit/${book._id}`}>
+              <Button>Edit</Button>
+            </Link>
           </TableRow>
         ))}
       </TableBody>
