@@ -4,7 +4,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -21,8 +20,8 @@ export function BookTable() {
 
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader>
+      <TableCaption>A list of your book items.</TableCaption>
+      <TableHeader className="text-left">
         <TableRow>
           <TableHead className="text-xl"> Title</TableHead>
           <TableHead className="text-sm">Author</TableHead>
@@ -38,12 +37,18 @@ export function BookTable() {
       <TableBody>
         {books?.map((book: TBook) => (
           <TableRow key={book._id}>
-            <TableCell>{book.title}</TableCell>
-            <TableCell>{book.author}</TableCell>
-            <TableCell className="font-medium">{book.genre}</TableCell>
-            <TableCell className="font-medium">{book.isbn}</TableCell>
-            <TableCell className="font-medium">{book.copies}</TableCell>
-            <TableCell className="font-medium">{book.available}</TableCell>
+            <TableCell className="text-left">{book.title}</TableCell>
+            <TableCell className="text-left">{book.author}</TableCell>
+            <TableCell className="font-medium text-left">
+              {book.genre}
+            </TableCell>
+            <TableCell className="font-medium text-left">{book.isbn}</TableCell>
+            <TableCell className="font-medium text-left">
+              {book.copies}
+            </TableCell>
+            <TableCell className="font-medium text-left">
+              {book.available}
+            </TableCell>
 
             <div className="space-x-6 flex justify-center items-center my-2">
               <Link
@@ -52,22 +57,22 @@ export function BookTable() {
               >
                 Edit <Edit />
               </Link>
-              <Link to={`/borrow}`} className="text-right">
+              <Link
+                to={`/books/edit/${book._id}`}
+                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
+              >
                 Borrow
               </Link>
-              <Link to={`/books/delete/${book._id}`} className="text-right">
+              <Link
+                to={`/books/${book._id}`}
+                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
+              >
                 Action
               </Link>
             </div>
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow>
-      </TableFooter>
     </Table>
   );
 }

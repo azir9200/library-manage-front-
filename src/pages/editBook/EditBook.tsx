@@ -66,7 +66,7 @@ const EditBook = () => {
     }
   };
   return (
-    <div className="mt-6">
+    <div className="px-8 py-12">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <div className="md:flex justify-center w-full  gap-4">

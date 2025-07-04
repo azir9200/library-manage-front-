@@ -30,12 +30,19 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
-    // Fetch edit book by ID
+    // edit book by ID
     editBook: builder.mutation({
       query: ({ id, data }: { id: string; data: TBook }) => ({
         url: `/books/edit/${id}`,
         method: "PATCH",
         body: data,
+      }),
+    }),
+    // Delete a by ID
+    deleteBook: builder.mutation({
+      query: (id: string) => ({
+        url: `/books/delete/${id}`,
+        method: "DELETE",
       }),
     }),
   }),
@@ -45,4 +52,5 @@ export const {
   useGetAllBookQuery,
   useGetBookDetailsQuery,
   useEditBookMutation,
+  useDeleteBookMutation,
 } = baseApi;

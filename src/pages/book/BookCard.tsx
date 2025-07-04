@@ -47,6 +47,12 @@ const BookCard: React.FC<BookProps> = ({ book }) => {
       >
         Book Details
       </Link>
+      <Link
+        to={`/books/${book._id}`}
+        className="w-full mt-4 bg-slate-600 text-white py-2 rounded-lg font-medium hover:bg-stone-600 transition duration-300"
+      >
+        Delete This Book
+      </Link>
     </div>
   );
 };
