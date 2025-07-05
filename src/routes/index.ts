@@ -21,6 +21,10 @@ const router = createBrowserRouter([
         Component: Book,
       },
       {
+        path: "/bookCards",
+        Component: Book,
+      },
+      {
         path: "/books/add",
         Component: AddBook,
       },
