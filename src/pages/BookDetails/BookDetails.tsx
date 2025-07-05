@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const BookDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [deleteBook] = useDeleteBookMutation(id);
+  const [deleteBook] = useDeleteBookMutation();
 
   const { data, isLoading, isError } = useGetBookDetailsQuery(id || "");
   const singleBook = data?.data;
@@ -18,7 +18,8 @@ const BookDetails = () => {
   if (isError) return <p>Error loading book details.</p>;
   if (!singleBook) return <p>No book found.</p>;
 
-  const handleDelete = async () => {
+  const handleDelete = async (id: string) => {
+    console.log("object id", id);
     try {
       await deleteBook(id).unwrap();
       toast.success("Book deleted successfully!");
@@ -65,14 +66,8 @@ const BookDetails = () => {
       </div>
 
       <div className="lg:flex justify-center items-center">
-        <Link
-          to="/books/add"
-          className="w-2/4 mt-4 mr-4 bg-slate-600 text-white p-2 rounded-lg font-medium hover:bg-green-500 transition duration-300"
-        >
-          Add New Book
-        </Link>
         <Button
-          onClick={handleDelete}
+          onClick={() => handleDelete(singleBook._id)}
           className=" w-2/4 mt-4 bg-slate-600  text-white py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300"
         >
           Delete This Book

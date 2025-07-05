@@ -2,7 +2,7 @@ import { baseApi } from "../baseApi/baseApi";
 
 const borrowApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    creteOrder: builder.mutation({
+    borrowBook: builder.mutation({
       query: (data) => {
         return {
           url: `/borrow`,
@@ -20,4 +20,4 @@ const borrowApi = baseApi.injectEndpoints({
     }),
   }),
 });
-export const { useCreteOrderMutation, useGetBorrowBookQuery } = borrowApi;
+export const { useBorrowBookMutation, useGetBorrowBookQuery } = borrowApi;

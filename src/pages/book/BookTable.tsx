@@ -59,7 +59,7 @@ export function BookTable() {
                 Edit <Edit />
               </Link>
               <Link
-                to={`/books/edit/${book._id}`}
+                to={`/borrow/${book._id}`}
                 className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
               >
                 Borrow
@@ -68,7 +68,7 @@ export function BookTable() {
                 to={`/books/${book._id}`}
                 className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
               >
-                Action
+                Delete
               </Link>
             </div>
           </TableRow>

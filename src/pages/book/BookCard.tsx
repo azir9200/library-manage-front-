@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import type { TBook } from "@/components/Types";
+import { Button } from "@/components/ui/button";
 
 interface BookProps {
   book: TBook;
@@ -33,7 +34,7 @@ const BookCard: React.FC<BookProps> = ({ book }) => {
         </p>
         <p className="text-gray-600">
           <span className="font-semibold">Available Copies:</span>{" "}
-          {book.available}
+          {book?.available}
         </p>
         <p className="text-gray-600">
           <span className="font-semibold">Total Copies:</span> {book.copies}
@@ -47,12 +48,12 @@ const BookCard: React.FC<BookProps> = ({ book }) => {
       >
         Book Details
       </Link>
-      <Link
+      <Button
         to={`/books/${book._id}`}
         className="w-full mt-4 bg-slate-600 text-white py-2 rounded-lg font-medium hover:bg-stone-600 transition duration-300"
       >
         Delete This Book
-      </Link>
+      </Button>
     </div>
   );
 };

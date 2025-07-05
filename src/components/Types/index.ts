@@ -12,3 +12,8 @@ export type TBook = {
   createdAt: string;
   updatedAt: string;
 };
+export type TBorrow = {
+  book: string;
+  quantity: number;
+  dueDate: string;
+};
