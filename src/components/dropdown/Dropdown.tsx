@@ -8,7 +8,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
-export function Dropdown() {
+const Dropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="" asChild>
@@ -32,4 +32,6 @@ export function Dropdown() {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
+
+export default Dropdown;

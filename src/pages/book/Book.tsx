@@ -1,7 +1,7 @@
 import { useGetAllBookQuery } from "@/redux/features/book/bookApi";
 import BookCard from "./BookCard";
 import type { TBook } from "@/components/Types";
-import { Dropdown } from "@/components/dropdown/dropdown";
+import Dropdown from "@/components/dropdown/Dropdown";
 
 const Book = () => {
   const { data } = useGetAllBookQuery(1);

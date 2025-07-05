@@ -1,16 +1,23 @@
-import { baseApi } from "../book/bookApi";
+import { baseApi } from "../baseApi/baseApi";
 
-const orderApi = baseApi.injectEndpoints({
+const borrowApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     creteOrder: builder.mutation({
       query: (data) => {
         return {
+          url: `/borrow`,
           method: "POST",
-          url: `/order/create`,
           body: data,
         };
       },
     }),
+    // Fetch all BOOKS
+    getBorrowBook: builder.query({
+      query: () => ({
+        url: "/borrow",
+        method: "GET",
+      }),
+    }),
   }),
 });
-export const { useCreteOrderMutation } = orderApi;
+export const { useCreteOrderMutation, useGetBorrowBookQuery } = borrowApi;

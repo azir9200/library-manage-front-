@@ -64,16 +64,16 @@ const BookDetails = () => {
         </p>
       </div>
 
-      <div className="">
+      <div className="lg:flex justify-center items-center">
         <Link
           to="/books/add"
-          className="w-full mt-4 bg-slate-600 text-white p-2 rounded-lg font-medium hover:bg-stone-600 transition duration-300"
+          className="w-2/4 mt-4 mr-4 bg-slate-600 text-white p-2 rounded-lg font-medium hover:bg-green-500 transition duration-300"
         >
           Add New Book
         </Link>
         <Button
           onClick={handleDelete}
-          className="w-full mt-4 bg-slate-600 ml-2 px-2 text-white py-2 rounded-lg font-medium hover:bg-stone-600 transition duration-300"
+          className=" w-2/4 mt-4 bg-slate-600  text-white py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300"
         >
           Delete This Book
         </Button>

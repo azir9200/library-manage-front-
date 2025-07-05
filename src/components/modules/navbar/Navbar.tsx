@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link className=" px-6 py-2" to="/books/add">
             Add Book
           </Link>
-          <Link className="px-6 py-2" to="/user">
+          <Link className="px-6 py-2" to="/borrow">
             Borrow Book
           </Link>
         </div>

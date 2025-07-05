@@ -1,4 +1,4 @@
-import { Dropdown } from "@/components/dropdown/dropdown";
+import Dropdown from "@/components/dropdown/Dropdown";
 import { BookTable } from "../book/BookTable";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
       {/* <Landing /> */}
       <div className=" flex justify-end items-center w-full">
         {" "}
-        <Dropdown  />{" "}
+        <Dropdown />{" "}
       </div>
       <BookTable />
     </div>

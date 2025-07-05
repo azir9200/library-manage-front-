@@ -1,9 +1,8 @@
 import type { TBook } from "@/components/Types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "../baseApi/baseApi";
 
-export const baseApi = createApi({
-  reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+
+const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // Add a Book
     addBook: builder.mutation({
@@ -23,7 +22,7 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
-    // Fetch a single product by ID
+    // Fetch a single book by ID
     getBookDetails: builder.query({
       query: (id: string) => ({
         url: `/books/${id}`,
@@ -53,4 +52,4 @@ export const {
   useGetBookDetailsQuery,
   useEditBookMutation,
   useDeleteBookMutation,
-} = baseApi;
+} = bookApi;
