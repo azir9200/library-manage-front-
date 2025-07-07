@@ -76,12 +76,7 @@ const BorrowBook = () => {
                   <FormItem className="w-full ">
                     <FormLabel>Quantity </FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        {...field}
-                        min={1}
-                        max={book?.copies || 1}
-                      />
+                      <Input type="number" {...field} min={1} />
                     </FormControl>
 
                     <FormMessage />

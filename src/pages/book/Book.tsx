@@ -6,9 +6,9 @@ import Dropdown from "@/components/dropdown/Dropdown";
 const Book = () => {
   const { data } = useGetAllBookQuery(1);
   console.log(data);
-  const books = data?.data;
+  const allBooks = data?.data;
+  const books = allBooks?.filter((item: any) => item.isDeleted == false);
   console.log("books ", books);
-
   return (
     <div>
       <div className=" flex justify-end items-center w-full">

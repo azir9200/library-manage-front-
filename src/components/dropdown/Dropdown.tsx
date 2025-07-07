@@ -1,34 +1,47 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Dropdown = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const isTableView = location.pathname === "/";
+  const isCardView = location.pathname === "/bookCards";
+
+  const handleNavigate = (path: string) => {
+    if (location.pathname !== path) {
+      navigate(path);
+    }
+  };
+
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="" asChild>
-        <Button className=" flex justify-end " variant="outline">
-          Views Options
+      <DropdownMenuTrigger asChild>
+        <Button className="flex justify-end" variant="outline">
+          View Options
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="start">
-        <DropdownMenuItem>
-          <Link className=" px-6 py-2" to="/">
-            Table View
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link className=" px-6 py-2" to="/bookCards">
-            Card View
-          </Link>
-        </DropdownMenuItem>
+        <DropdownMenuCheckboxItem
+          checked={isTableView}
+          onCheckedChange={() => handleNavigate("/")}
+        >
+          Table View
+        </DropdownMenuCheckboxItem>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={isCardView}
+          onCheckedChange={() => handleNavigate("/bookCards")}
+        >
+          Card View
+        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

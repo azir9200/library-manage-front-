@@ -15,7 +15,7 @@ import {
 } from "@/redux/features/book/bookApi";
 
 import { Edit } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -24,16 +24,10 @@ export function BookTable() {
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
   const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
-  const { data, refetch } = useGetAllBookQuery(1);
+  const { data } = useGetAllBookQuery(1);
 
-  const books = data?.data;
-
-  useEffect(() => {
-    if (localStorage.getItem("book_edited") === "true") {
-      refetch();
-      localStorage.removeItem("book_edited");
-    }
-  }, [refetch]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const books = data?.data.filter((item: any) => item.isDeleted == false);
 
   const handleDelete = async () => {
     if (!selectedBookId) return;

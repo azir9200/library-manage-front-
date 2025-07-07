@@ -12,6 +12,7 @@ const bookApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["books"],
     }),
 
     // Fetch all BOOKS
@@ -20,6 +21,7 @@ const bookApi = baseApi.injectEndpoints({
         url: "/books",
         method: "GET",
       }),
+      providesTags: ["books"],
     }),
     // Fetch a single book by ID
     getBookDetails: builder.query({
@@ -35,6 +37,7 @@ const bookApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["books"],
     }),
     // Delete a by ID
     deleteBook: builder.mutation({
@@ -42,6 +45,7 @@ const bookApi = baseApi.injectEndpoints({
         url: `/books/delete/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["books"],
     }),
   }),
 });

@@ -9,4 +9,5 @@ export const baseApi = createApi({
     credentials: "include",
   }),
   endpoints: () => ({}),
+  tagTypes: ["books"],
 });

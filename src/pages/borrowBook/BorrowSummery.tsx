@@ -1,10 +1,12 @@
+
 import { useGetBorrowBookQuery } from "@/redux/features/borrow/borrowApi";
 
 const BorrowSummery = () => {
-  const { data } = useGetBorrowBookQuery(1);
+  const { data } = useGetBorrowBookQuery(undefined);
   const borrowBook = data?.data;
-
+  // console.log("summery", BorrowSummery);
   console.log("book as ", borrowBook);
+
   return (
     <div>
       <div className="overflow-x-auto">
@@ -40,7 +42,7 @@ const BorrowSummery = () => {
                 </td>
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-2">
-                    {item?.book?.copies}
+                    {item?.quantity}
                   </div>
                 </td>
               </tr>
