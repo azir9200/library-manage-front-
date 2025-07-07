@@ -26,8 +26,7 @@ const DeleteModal = ({
           Confirm Deletion
         </h2>
         <p className="text-sm text-gray-600 mb-6">
-          Are you sure you want to delete this book? This action cannot be
-          undone.
+          Are you sure you want to delete this book?
         </p>
         <div className="flex justify-center gap-4">
           <Button

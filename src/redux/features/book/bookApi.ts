@@ -1,7 +1,6 @@
 import type { TBook } from "@/components/Types";
 import { baseApi } from "../baseApi/baseApi";
 
-
 const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // Add a Book
@@ -9,7 +8,7 @@ const bookApi = baseApi.injectEndpoints({
       query: (data) => {
         return {
           method: "POST",
-          url: `/create-book`,
+          url: `books/create-book`,
           body: data,
         };
       },
@@ -32,7 +31,7 @@ const bookApi = baseApi.injectEndpoints({
     // edit book by ID
     editBook: builder.mutation({
       query: ({ id, data }: { id: string; data: TBook }) => ({
-        url: `/edit-book/${id}`,
+        url: `books/edit-book/${id}`,
         method: "PATCH",
         body: data,
       }),

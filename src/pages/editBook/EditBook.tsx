@@ -10,10 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-// import {
-//   useEditBookMutation,
-//   useGetBookDetailsQuery,
-// } from "@/redux/features/book/bookApi";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,7 +39,8 @@ const EditBook = () => {
   const { data: singleBook } = useGetBookDetailsQuery(id || "");
 
   const book = singleBook?.data;
-  console.log("book res", singleBook);
+  console.log("book res", book);
+  console.log("book single", singleBook);
 
   useEffect(() => {
     if (book) {
@@ -67,6 +64,7 @@ const EditBook = () => {
       };
       await editBook({ id: id as string, data: copiedData }).unwrap();
       toast.success("Book updated successfully!");
+      localStorage.setItem("book_edited", "true");
       navigate("/");
     } catch (error) {
       toast.error("Failed to update book");
@@ -97,7 +95,7 @@ const EditBook = () => {
               name="author"
               render={({ field }) => (
                 <FormItem className="w-full ">
-                  <FormLabel>Author</FormLabel>
+                  <FormLabel>Author test</FormLabel>
                   <FormControl>
                     <Input placeholder="author" {...field} />
                   </FormControl>
