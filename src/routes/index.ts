@@ -27,11 +27,11 @@ const router = createBrowserRouter([
         Component: Book,
       },
       {
-        path: "/books/add",
+        path: "/create-book",
         Component: AddBook,
       },
       {
-        path: "/books/edit/:id",
+        path: "/edit-book/:id",
         Component: EditBook,
       },
       {

@@ -1,3 +1,4 @@
+import DeleteModal from "@/components/DeleteModal/DeleteModal";
 import type { TBook } from "@/components/Types";
 import {
   Table,
@@ -8,72 +9,110 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetAllBookQuery } from "@/redux/features/book/bookApi";
+import {
+  useDeleteBookMutation,
+  useGetAllBookQuery,
+} from "@/redux/features/book/bookApi";
 
 import { Edit } from "lucide-react";
-
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 export function BookTable() {
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
+
+  const [deleteBook, { isLoading: isDeleting }] = useDeleteBookMutation();
   const { data } = useGetAllBookQuery(1);
-  console.log(data);
+
   const books = data?.data;
+  console.log("books availabale", books);
+  const handleDelete = async () => {
+    if (!selectedBookId) return;
+    try {
+      await deleteBook(selectedBookId).unwrap();
+      toast.success("Book deleted successfully!");
+    } catch (err) {
+      toast.error("Failed to delete book");
+      console.error(err);
+    } finally {
+      setShowConfirm(false);
+      setSelectedBookId(null);
+    }
+  };
 
   return (
-    <Table>
-      <TableCaption>A list of your book items.</TableCaption>
-      <TableHeader className="text-left">
-        <TableRow>
-          <TableHead className="text-xl"> Title</TableHead>
-          <TableHead className="text-sm">Author</TableHead>
-          <TableHead className="text-sm">Genre</TableHead>
-          <TableHead className="text-sm">ISBN</TableHead>
-          <TableHead className="text-sm">Copies</TableHead>
-          <TableHead className="text-sm">Availability</TableHead>
-          <TableHead className="text-sm">Action</TableHead>
-        </TableRow>
-      </TableHeader>
-      {/* Columns: Title, Author, Genre, ISBN, Copies, Availability, and Actions. */}
-
-      <TableBody>
-        {books?.map((book: TBook) => (
-          <TableRow key={book._id}>
-            <TableCell className="text-left">{book.title}</TableCell>
-            <TableCell className="text-left">{book.author}</TableCell>
-            <TableCell className="font-medium text-left">
-              {book.genre}
-            </TableCell>
-            <TableCell className="font-medium text-left">{book.isbn}</TableCell>
-            <TableCell className="font-medium text-left">
-              {book.copies}
-            </TableCell>
-            <TableCell className="font-medium text-left">
-              {book.available}
-            </TableCell>
-
-            <div className="space-x-6 flex justify-center items-center my-2">
-              <Link
-                to={`/books/edit/${book._id}`}
-                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
-              >
-                Edit <Edit />
-              </Link>
-              <Link
-                to={`/borrow/${book._id}`}
-                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
-              >
-                Borrow
-              </Link>
-              <Link
-                to={`/books/${book._id}`}
-                className="text-right flex gap-2 bg-slate-200 rounded-md p-2"
-              >
-                Delete
-              </Link>
-            </div>
+    <>
+      <Table>
+        <TableCaption>A list of your book items.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Title</TableHead>
+            <TableHead>Author</TableHead>
+            <TableHead>Genre</TableHead>
+            <TableHead>ISBN</TableHead>
+            <TableHead>Copies</TableHead>
+            <TableHead>Availability</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {books?.map((book: TBook) => (
+            <TableRow key={book._id}>
+              <TableCell>{book.title}</TableCell>
+              <TableCell>{book.author}</TableCell>
+              <TableCell>{book.genre}</TableCell>
+              <TableCell>{book.isbn}</TableCell>
+              <TableCell>{book.copies}</TableCell>
+              <TableCell>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                    book.available
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {book.available ? "Available" : "Not Available"}
+                </span>
+              </TableCell>
+              <TableCell>
+                <div className="flex gap-2">
+                  <Link
+                    to={`/edit-book/${book._id}`}
+                    className="bg-slate-200 hover:bg-slate-300 text-sm px-3 py-1 rounded flex items-center gap-1"
+                  >
+                    Edit <Edit size={16} />
+                  </Link>
+                  <Link
+                    to={`/borrow/${book._id}`}
+                    className="bg-slate-200 hover:bg-slate-300 text-sm px-3 py-1 rounded"
+                  >
+                    Borrow
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setSelectedBookId(book._id);
+                      setShowConfirm(true);
+                    }}
+                    className="bg-red-100 hover:bg-red-200 text-sm px-3 py-1 rounded text-red-700"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      {/* Confirmation Modal */}
+      <DeleteModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+      />
+    </>
   );
 }

@@ -17,3 +17,8 @@ export type TBorrow = {
   quantity: number;
   dueDate: string;
 };
+export type TBookEdit = {
+  title: string;
+  author: string;
+  copies: number;
+};

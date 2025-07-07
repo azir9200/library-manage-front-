@@ -1,34 +1,15 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  useDeleteBookMutation,
-  useGetBookDetailsQuery,
-} from "@/redux/features/book/bookApi";
-import toast from "react-hot-toast";
-import { Button } from "@/components/ui/button";
+import { Link, useParams } from "react-router-dom";
+import { useGetBookDetailsQuery } from "@/redux/features/book/bookApi";
 
 const BookDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const [deleteBook] = useDeleteBookMutation();
 
   const { data, isLoading, isError } = useGetBookDetailsQuery(id || "");
   const singleBook = data?.data;
 
-  if (isLoading) return <p>Loading book details...</p>;
+  if (isLoading) return <p>Loading book details... </p>;
   if (isError) return <p>Error loading book details.</p>;
   if (!singleBook) return <p>No book found.</p>;
-
-  const handleDelete = async (id: string) => {
-    console.log("object id", id);
-    try {
-      await deleteBook(id).unwrap();
-      toast.success("Book deleted successfully!");
-      navigate("/");
-    } catch (error) {
-      toast.error("Failed to delete book");
-      console.log(error);
-    }
-  };
 
   return (
     <div className="max-w-7xl rounded-2xl overflow-hidden shadow-lg bg-white p-5 transition-transform transform hover:scale-105 hover:shadow-xl">
@@ -66,12 +47,12 @@ const BookDetails = () => {
       </div>
 
       <div className="lg:flex justify-center items-center">
-        <Button
-          onClick={() => handleDelete(singleBook._id)}
-          className=" w-2/4 mt-4 bg-slate-600  text-white py-2 rounded-lg font-medium hover:bg-red-600 transition duration-300"
+        <Link
+          to="/books/add"
+          className=" w-2/4 mt-4 bg-slate-600  text-white py-2 rounded-lg font-medium hover:bg-green-400 transition duration-300"
         >
-          Delete This Book
-        </Button>
+          Add New Book
+        </Link>
       </div>
     </div>
   );

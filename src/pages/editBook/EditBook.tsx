@@ -17,7 +17,10 @@ import { Input } from "@/components/ui/input";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEditBookMutation, useGetBookDetailsQuery } from "@/redux/features/book/bookApi";
+import {
+  useEditBookMutation,
+  useGetBookDetailsQuery,
+} from "@/redux/features/book/bookApi";
 
 const EditBook = () => {
   const navigate = useNavigate();
@@ -58,7 +61,11 @@ const EditBook = () => {
 
   const onSubmit = async (data: TBook) => {
     try {
-      await editBook({ id: id as string, data }).unwrap();
+      const copiedData = {
+        ...data,
+        available: Number(data.copies) > 0 ? 1 : 0,
+      };
+      await editBook({ id: id as string, data: copiedData }).unwrap();
       toast.success("Book updated successfully!");
       navigate("/");
     } catch (error) {
@@ -184,10 +191,15 @@ const EditBook = () => {
                 <FormItem className="w-full ">
                   <FormLabel>Available</FormLabel>
                   <FormControl>
-                    <Input placeholder="available" {...field} />
+                    <Input {...field} placeholder="available" disabled />
                   </FormControl>
 
                   <FormMessage />
+                  {Number(form.watch("copies")) === 0 && (
+                    <p className="text-sm text-red-500 mt-2">
+                      Book is unavailable.
+                    </p>
+                  )}
                 </FormItem>
               )}
             />

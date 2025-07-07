@@ -18,23 +18,23 @@ const Footer = () => {
           <h2 className="text-xl  font-bold">Quick Links</h2>
           <ul className=" space-y-2  grid grid-cols-2">
             <li>
-              <Link color="foreground" to="/shop">
-                Shop
+              <Link color="foreground" to="/book">
+                Book
               </Link>
             </li>
             <li>
-              <Link color="foreground" to="/categories">
-                Categories
+              <Link color="foreground" to="/addBook">
+                Add Book
               </Link>
             </li>
             <li>
-              <Link color="foreground" to="/about">
-                About Us
+              <Link color="foreground" to="/book_summery">
+                Book Summery
               </Link>
             </li>
             <li>
               <Link color="foreground" to="/contact">
-                Contact
+                Home
               </Link>
             </li>
           </ul>

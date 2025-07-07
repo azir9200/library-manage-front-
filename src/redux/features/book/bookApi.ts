@@ -9,7 +9,7 @@ const bookApi = baseApi.injectEndpoints({
       query: (data) => {
         return {
           method: "POST",
-          url: `/books`,
+          url: `/create-book`,
           body: data,
         };
       },
@@ -32,7 +32,7 @@ const bookApi = baseApi.injectEndpoints({
     // edit book by ID
     editBook: builder.mutation({
       query: ({ id, data }: { id: string; data: TBook }) => ({
-        url: `/books/edit/${id}`,
+        url: `/edit-book/${id}`,
         method: "PATCH",
         body: data,
       }),

@@ -14,7 +14,7 @@ const borrowApi = baseApi.injectEndpoints({
     // Fetch all BOOKS
     getBorrowBook: builder.query({
       query: () => ({
-        url: "/borrow",
+        url: "/borrow-summary",
         method: "GET",
       }),
     }),
