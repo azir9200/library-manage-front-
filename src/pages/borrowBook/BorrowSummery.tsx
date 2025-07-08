@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useGetBorrowBookQuery } from "@/redux/features/borrow/borrowApi";
 
 const BorrowSummery = () => {
   const { data } = useGetBorrowBookQuery(undefined);
   const borrowBook = data?.data;
-  // console.log("summery", BorrowSummery);
   console.log("book as ", borrowBook);
 
   return (
@@ -25,24 +25,22 @@ const BorrowSummery = () => {
             </tr>
           </thead>
           <tbody>
-            {borrowBook?.map((item, index) => (
+            {borrowBook?.map((item: any) => (
               <tr
                 key={item.isbn}
                 className="border-b border-gray-100 hover:bg-gray-50"
               >
                 <td className="py-4 px-4">
-                  <p className="font-medium text-gray-900">
-                    {item?.book?.title}
-                  </p>
+                  <p className="font-medium text-gray-900">{item?.title}</p>
                 </td>
                 <td className="py-4 px-4">
                   <code className="text-sm bg-gray-100 px-2 py-1 rounded">
-                    {item?.book?.isbn}
+                    {item?.isbn}
                   </code>
                 </td>
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-2">
-                    {item?.quantity}
+                    {item?.totalBorrowed}
                   </div>
                 </td>
               </tr>

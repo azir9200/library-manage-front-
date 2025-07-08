@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="max-w-[h-screen] bg-gradient-to-r from-slate-600 to-slate-600 text-white shadow-xl rounded-2xl p-2   mt-4">
+    <nav className="border border-amber-500 bg-gradient-to-r from-slate-600 to-slate-600 text-white shadow-xl rounded-2xl p-2   mt-4">
       <div className="flex items-center justify-between py-4">
         {/* Logo */}
         <div className="text-2xl font-bold tracking-tight flex items-center gap-2">
